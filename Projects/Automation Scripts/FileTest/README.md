@@ -75,9 +75,21 @@ You can customize the following parameters inside the script:
 
 ---
 
+## ⚠️ Important Notes
+
+Running this project indefinitely will keep modifying the file unless manually stopped.
+The current version does not handle graceful shutdown of threads.
+Ensure SMTP settings are correct if enabling email notifications.
+
+## ✨ Future Improvements
+
+Command-line configuration for file names and sizes.
+Graceful shutdown using thread events.
+Support for multiple output formats (binary vs text mode).
+
 ## 🚀 Running the Project
 
 Simply run the script:
 
 ```bash
-python your_script_name.py
+python FileAppendRemove.py
