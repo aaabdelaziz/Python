@@ -26,7 +26,11 @@ def main():
     msg['To'] = MY_ADDRESS
     
     # Send the message via our own SMTP server.
-    s = smtplib.SMTP('localhost')
+    # s = smtplib.SMTP('localhost')
+    s = smtplib.SMTP('smtp.gmail.com', 587)
+    s.starttls()
+    s.login('your_email@gmail.com', 'your_password')
+
     s.send_message(msg)
     s.quit()
 
