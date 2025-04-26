@@ -1,5 +1,6 @@
 from math import *
 
+import math
 
 print(4.0435343432432343430011)
 print(3 * 4.5)
@@ -38,9 +39,6 @@ print(ceil(3.5))
 
 # Get the square root for +ve numbers
 print(sqrt(-1*num))
-
-
-import math
 
 num=4
 print(math.sqrt(num))
