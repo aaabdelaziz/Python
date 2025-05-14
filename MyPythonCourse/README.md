@@ -1,6 +1,7 @@
 # My Python Course 🐍
 
 This repository contains code examples, exercises, and notebooks used for teaching Python programming. It is designed for beginners and intermediate learners who want to gain hands-on experience with Python fundamentals, data types, control flow, functions, and more.
+![Python for Beginners](./MyPythonCourse.png)
 
 ## 📂 Repository Structure
 
