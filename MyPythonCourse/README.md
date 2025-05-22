@@ -19,7 +19,7 @@ This repository contains code examples, exercises, and notebooks used for teachi
 
 You can run all the notebooks directly in your browser using Binder:
 
-[![Launch in Binder](https://mybinder.org/badge_logo.svg)]([https://hub.2i2c.mybinder.org/user/aaabdelaziz-python-2uwcz1qs/lab/tree/MyPythonCourse](https://github.com/aaabdelaziz/Python/tree/main/MyPythonCourse/1-BasicModule))
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/aaabdelaziz/Python/tree/main/MyPythonCourse/1-BasicModule)
 
 No installation is needed — just click the button above and start learning Python in the cloud!
 
