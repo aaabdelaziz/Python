@@ -5,10 +5,10 @@ This repository contains code examples, exercises, and notebooks used for teachi
 
 ## 📂 Repository Structure
 
-- `week1_basics.python` – Introduction to Python syntax and variables  
-- `week2_control_flow.python` – If/else, loops, and logical conditions  
-- `week3_functions.python` – Defining and calling functions  
-- `week4_collections.python` – Lists, tuples, dictionaries, sets  
+- `week1.1_basics.python` – Introduction to Python syntax and variables  
+- `week1.2_control_flow.python` – If/else, loops, and logical conditions  
+- `week1.3_functions.python` – Defining and calling functions  
+- `week2_collections.python` – Lists, tuples, dictionaries, sets  
 - And more...
 
 > All `.python` files have been prepared to be converted to Jupyter notebooks for easier online execution.
