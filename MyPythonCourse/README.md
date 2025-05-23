@@ -19,7 +19,8 @@ This repository contains code examples, exercises, and notebooks used for teachi
 
 You can run all the notebooks directly in your browser using Binder:
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/aaabdelaziz/Python/tree/main/MyPythonCourse/1-BasicModule)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/aaabdelaziz/)
+
 
 No installation is needed — just click the button above and start learning Python in the cloud!
 
