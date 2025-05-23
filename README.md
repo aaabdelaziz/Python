@@ -66,6 +66,6 @@ Make sure to follow along with the full Python course and tutorials available on
 
 ## 🤝 Contributions
 
-Contributions, suggestions, and feedback are very welcome!  
+Suggestions, and feedback are very welcome!  
 
 ---
