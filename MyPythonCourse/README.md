@@ -19,12 +19,10 @@ There are 3 Modules in the course:
 
 ## 🚀 Run the Notebooks Online
 
-You can run all the notebooks directly in your browser using Binder:
+You can run all the notebooks directly in your browser using Jupyter Online.
 
-1- For Basic Module:
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://mybinder.org/v2/gh/aaabdelaziz/Python/main?urlpath=/tree/MyPythonCourse/1-BasicModule)
-
+1- Open Here for Basic Module:
+[![Open in Jupyter](https://img.shields.io/badge/Open%20in-Jupyter-orange?logo=jupyter)](https://hub.2i2c.mybinder.org/user/aaabdelaziz-python-8wzy33zb/tree/MyPythonCourse/1-BasicModule)
 
 No installation is needed — just click the button above and start learning Python in the cloud!
 
