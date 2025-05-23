@@ -4,7 +4,9 @@ This repository contains code examples, exercises, and notebooks used for teachi
 ![Python for Beginners](./MyPythonCourse.png)
 
 ## 📂 Repository Structure
+There are 3 Modules in the course:
 
+1- Basic Module:
 - `week1.1_basics.python` – Introduction to Python syntax and variables  
 - `week1.2_control_flow.python` – If/else, loops, and logical conditions  
 - `week1.3_functions.python` – Defining and calling functions  
