@@ -35,6 +35,24 @@ def get_email_details(service, msg_id):
     headers = msg['payload'].get('headers', [])
     subject = ''
     date = ''
+    for header in headers:
+        if header['name'] == 'Subject':
+            subject = header['value']
+        if header['name'] == 'Date':
+            date = header['value']
+
+    parts = msg['payload'].get('parts', [])
+    message_body = ''
+    if 'body' in msg['payload']:
+        data = msg['payload']['body'].get('data')
+        if data:
+            message_body = base64.urlsafe_b64decode(data).decode('utf-8')
+
+    if not message_body and parts:
+        for part in parts:
+            if 'body' in part and 'data' in part['body']:
+                message_body = base64.urlsafe_b64decode(part['body']['data']).decode('utf-8')
+                break
 
     return subject, message_body, date
 
