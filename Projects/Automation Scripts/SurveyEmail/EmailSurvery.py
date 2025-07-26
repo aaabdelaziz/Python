@@ -1,5 +1,4 @@
 import os
-import pickle
 import base64
 import re
 import pandas as pd
@@ -9,8 +8,7 @@ from googleapiclient.discovery import build
 from email.utils import parsedate_to_datetime
 from google.auth.transport.requests import Request
 
-
-# If modifying these scopes, delete token.json
+# Scopes and Credential files
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 CREDENTIALS_FILE = 'credentials.json'
 TOKEN_FILE = 'token.json'
@@ -41,11 +39,18 @@ def get_email_details(service, msg_id):
     headers = msg['payload'].get('headers', [])
     subject = ''
     date_str = ''
+    sender_email = ''
     for header in headers:
         if header['name'] == 'Subject':
             subject = header['value']
         if header['name'] == 'Date':
             date_str = header['value']
+        if header['name'] == 'From':
+            sender_email = header['value']  # contains full name + email
+
+    # Extract only email address from "From" header
+    import email.utils
+    sender_email_parsed = email.utils.parseaddr(sender_email)[1]
 
     # Parse the date to format dd.mm.yy
     try:
@@ -64,17 +69,17 @@ def get_email_details(service, msg_id):
     if not message_body and 'body' in msg['payload'] and 'data' in msg['payload']['body']:
         message_body = base64.urlsafe_b64decode(msg['payload']['body']['data']).decode('utf-8')
 
-    return subject, message_body, date_formatted
+    return subject, message_body, date_formatted, sender_email_parsed
 
 def main():
     service = authenticate_gmail()
-    # keywords = ['thank you for', 'Bewerbung', 'Ihre Bewerbung', 'GmbH']  # Adjust keywords as needed
-    keywords = ['received your application', 'Thank you for your interest',
+    keywords = ['received your application',
+                'Thank you for your interest',
                 'Thank you for submitting your application',
                 'Thank you for your application',
                 'vielen Dank für dein Interesse',
-                'Your application at',
-                'thank you again for applying',
+                'Your application',
+                "your application has been received",
                 'thank you again for applying',
                 'received your application',
                 'vielen Dank für deine Nachricht',
@@ -82,42 +87,50 @@ def main():
                 'vielen Dank für Ihre Bewerbung',
                 'vielen Dank für Ihre Zusendung',
                 'vielen Dank für Ihre Nachricht',
-                'wir danken Ihnen für Ihre Bewerbung',
-                'wir möchten uns ganz herzlich für deine Bewerbung',
+                'danken Ihnen für Ihre Bewerbung',
+                "Ihre Bewerbung ist eingegangen",
+                'möchten uns ganz herzlich für deine Bewerbung',
                 'für deine Bewerbung' ]  # Adjust keywords as needed
-
+                
     email_data = []
 
     for keyword in keywords:
         print(f"Searching for keyword: {keyword}")
         messages = search_emails(service, keyword)
         for msg in messages:
-            subject, message, date = get_email_details(service, msg['id'])
-            email_data.append({'Date': date, 'Email Title': subject, 'Message Content': message})
+            subject, message, date, sender_email = get_email_details(service, msg['id'])
+            email_data.append({
+                'Date': date,
+                'Email Title': subject,
+                'Message Content': message,
+                'Email Sender': sender_email
+            })
 
     # Create DataFrame
     df = pd.DataFrame(email_data)
 
-    # Sort by date in ascending order
-    # Even if some dates are blank, handle gracefully
-    df = df[df['Date'].astype(bool)]  # Remove empty date entries if any
-    # No need to convert to datetime as already formatted
-    # But for safety, sort assuming 'Date' in 'dd.mm.yy' format
-    # Because it's string, sort properly (if needed)
-    # For proper chronological sorting, convert back to date for sorting:
+    # Remove entries without date for sorting
+    df = df[df['Date'].astype(bool)]  # Remove empty date entries
+
+    # Parse date for sorting
     def parse_date(date_str):
         try:
             return pd.to_datetime(date_str, format='%d.%m.%y')
         except:
             return pd.NaT
-
     df['ParsedDate'] = df['Date'].apply(parse_date)
     df = df.dropna(subset=['ParsedDate'])
+
+    # Sort by parsed date
     df = df.sort_values(by='ParsedDate')
     df = df.drop('ParsedDate', axis=1)
 
     # Save to Excel
     df.to_excel('emails.xlsx', index=False, engine='openpyxl')
 
+
 if __name__ == '__main__':
     main()
+
+
+
