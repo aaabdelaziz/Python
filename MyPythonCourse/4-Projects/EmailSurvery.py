@@ -26,6 +26,9 @@ def authenticate_gmail():
     return service
 
 def search_emails(service, query):
+    results = service.users().messages().list(userId='me', q=query).execute()
+    messages = results.get('messages', [])
+    return messages
 
 def get_email_details(service, msg_id):
 
