@@ -7,6 +7,8 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from email.utils import parsedate_to_datetime
+from google.auth.transport.requests import Request
+
 
 # If modifying these scopes, delete token.json
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
@@ -66,7 +68,24 @@ def get_email_details(service, msg_id):
 
 def main():
     service = authenticate_gmail()
-    keywords = ['thank you for', 'Bewerbung', 'Ihre Bewerbung', 'GmbH']  # Adjust keywords as needed
+    # keywords = ['thank you for', 'Bewerbung', 'Ihre Bewerbung', 'GmbH']  # Adjust keywords as needed
+    keywords = ['received your application', 'Thank you for your interest',
+                'Thank you for submitting your application',
+                'Thank you for your application',
+                'vielen Dank für dein Interesse',
+                'Your application at',
+                'thank you again for applying',
+                'thank you again for applying',
+                'received your application',
+                'vielen Dank für deine Nachricht',
+                'vielen Dank für die Zusendung',
+                'vielen Dank für Ihre Bewerbung',
+                'vielen Dank für Ihre Zusendung',
+                'vielen Dank für Ihre Nachricht',
+                'wir danken Ihnen für Ihre Bewerbung',
+                'wir möchten uns ganz herzlich für deine Bewerbung',
+                'für deine Bewerbung' ]  # Adjust keywords as needed
+
     email_data = []
 
     for keyword in keywords:
