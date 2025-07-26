@@ -58,7 +58,7 @@ def get_email_details(service, msg_id):
 
 def main():
     service = authenticate_gmail()
-    keywords = ['thank you for', 'Deine Bewerbung']  # Replace with your keywords
+    keywords = ['thank you for', 'Bewerbung', 'Ihre Bewerbung', 'GmbH', ]  # Replace with your keywords
     email_data = []
 
     for keyword in keywords:
