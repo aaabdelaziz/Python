@@ -31,7 +31,12 @@ def search_emails(service, query):
     return messages
 
 def get_email_details(service, msg_id):
+    msg = service.users().messages().get(userId='me', id=msg_id, format='full').execute()
+    headers = msg['payload'].get('headers', [])
+    subject = ''
+    date = ''
 
+    return subject, message_body, date
 
 def main():
     service = authenticate_gmail()
